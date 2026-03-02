@@ -1,0 +1,223 @@
+/* =========================
+   NAVBAR BASE
+========================= */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 22px 0;
+  transition: all 0.3s ease;
+
+  background: transparent;
+}
+
+/* transparent only */
+.navbar.scrolled {
+  background: #fff;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+  padding: 14px 0;
+}
+
+.navbar-inner {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.logo {
+  font-size: 30px;
+  font-family: serif;
+  color: black;
+  text-decoration: none;
+}
+
+/* =========================
+   DESKTOP NAV
+========================= */
+
+.desktop-nav {
+  display: flex;
+  gap: 42px;
+}
+
+.nav-link {
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #444;
+  padding-bottom: 6px;
+  transition: color 0.3s;
+}
+
+/* hover gold */
+.nav-link:hover {
+  color: #C6A14A;
+}
+
+/* underline animation */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background: #C6A14A;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* active page */
+.nav-link.active {
+  color: #C6A14A;
+}
+
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* =========================
+   RIGHT ICONS
+========================= */
+
+.right-icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.icon-wrapper {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ⭐ PERFECT BADGE (GIVA STYLE) */
+.icon-badge {
+  position: absolute;
+  top: -7px;
+  right: -9px;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #f47aa3;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  pointer-events: none;
+}
+
+/* =========================
+   PROFILE DROPDOWN
+========================= */
+
+.profile-dropdown {
+  position: absolute;
+  right: 0;
+  top: 45px;
+  width: 280px;
+  background: white;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.profile-dropdown div {
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+.logout {
+  color: red;
+  font-weight: 600;
+}
+
+/* =========================
+   MOBILE MENU BUTTON
+========================= */
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* =========================
+   MOBILE HALF PAGE MENU
+========================= */
+
+.mobile-dropdown {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  height: 50vh; /* HALF SCREEN */
+  background: white;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  z-index: 999;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+}
+
+.mobile-dropdown a {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: #333;
+  font-weight: 500;
+}
+
+.mobile-dropdown a:hover {
+  color: #C6A14A;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+  .desktop-nav {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .profile-dropdown {
+    position: fixed;
+    left: 10px;
+    right: 10px;
+    top: 70px;
+    width: auto;
+  }
+
+}

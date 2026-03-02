@@ -1,0 +1,14 @@
+:root {
+  --dark-bg: #0f0f12;
+  --light-bg: #fdf9f6;
+  --gold-primary: #c6a75e;
+  --gold-soft: #d8c28a;
+  --pink-accent: #e8b4c8;
+  --text-light: #f5f3ef;
+  --text-dark: #2b2b2b;
+
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Poppins', sans-serif;
+
+  --transition-smooth: all 0.4s ease;
+}

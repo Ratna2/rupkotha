@@ -1,0 +1,75 @@
+.admin-enquiry {
+  padding: 30px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 20px;
+}
+
+.list-panel {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 12px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.card {
+  padding: 12px;
+  border: 1px solid #eee;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.card.active {
+  border: 2px solid black;
+}
+
+.card span {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.new { background:#ffe8e8; }
+.replied { background:#d9ffe2; }
+
+.detail-panel {
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 25px;
+}
+
+.message-box {
+  background: #fafafa;
+  padding: 12px;
+  margin: 15px 0;
+  border-radius: 8px;
+}
+
+textarea {
+  width: 100%;
+  height: 120px;
+  padding: 12px;
+  margin-top: 10px;
+}
+
+.send-btn {
+  margin-top: 15px;
+  padding: 12px 20px;
+  background: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+}

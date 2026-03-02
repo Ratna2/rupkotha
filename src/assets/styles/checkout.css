@@ -1,0 +1,511 @@
+/* ===============================
+   PAGE BASE
+================================= */
+.checkout-page {
+  background: #f3f3f3;
+  min-height: 100vh;
+  padding: 30px 40px;
+  font-family: "Poppins", sans-serif;
+}
+
+.checkout-wrapper {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 25px;
+  align-items: start;
+}
+
+/* ===============================
+   LEFT SIDE
+================================= */
+
+.checkout-left {
+  background: white;
+  border-radius: 12px;
+  padding: 22px;
+  border: 1px solid #e5e5e5;
+}
+
+.checkout-left h2 {
+  font-size: 20px;
+  margin-bottom: 14px;
+  font-weight: 600;
+}
+
+/* ===============================
+   ADDRESS SECTION
+================================= */
+
+.address-section {
+  border: 1px solid #e6e6e6;
+  padding: 18px;
+  border-radius: 10px;
+  margin-bottom: 18px;
+  background: #fff;
+}
+
+.address-card h3 {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.address-card p {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 4px;
+}
+
+.change-address-btn {
+  margin-top: 10px;
+  background: #fff;
+  border: 1px solid #e77a87;
+  color: #e77a87;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.change-address-btn:hover {
+  background: #fff3f5;
+}
+
+/* AMAZON CONTINUE BUTTON */
+.continue-btn {
+  width: 100%;
+  margin: 15px 0 25px;
+  background: linear-gradient(135deg,#e77a87,#d65f6e);
+  color: white;
+  border: none;
+  padding: 13px;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ===============================
+   PAYMENT SECTION
+================================= */
+
+.payment-title {
+  margin-top: 10px;
+}
+
+.payment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.payment-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  border: 1px solid #ddd;
+  padding: 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+  background: #fff;
+}
+
+.payment-card:hover {
+  border-color: #e77a87;
+  background: #fff8f9;
+}
+
+.payment-card input {
+  margin-top: 4px;
+  transform: scale(1.15);
+}
+
+.payment-card h4 {
+  font-size: 15px;
+  margin-bottom: 3px;
+}
+
+.payment-card p {
+  font-size: 13px;
+  color: #666;
+}
+
+/* ===============================
+   RADIO
+================================= */
+
+.radio {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+/* PAY BUTTON AMAZON STYLE */
+.pay-btn {
+  width: 100%;
+  margin-top: 15px;
+  background: linear-gradient(135deg,#e77a87,#d65f6e);
+  border: none;
+  color: white;
+  padding: 14px;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ===============================
+   RIGHT SIDE (ORDER SUMMARY)
+================================= */
+
+.checkout-right {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e6e6e6;
+  padding: 18px;
+  position: sticky;
+  top: 100px;
+}
+
+.checkout-right h3 {
+  margin-bottom: 14px;
+  font-size: 18px;
+}
+
+.order-preview {
+  max-height: 320px;
+  overflow-y: auto;
+  margin-bottom: 16px;
+}
+
+.preview-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.preview-item img {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.preview-item p {
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+
+.preview-item span {
+  font-size: 12px;
+  color: #666;
+}
+
+.preview-item strong {
+  margin-left: auto;
+  font-size: 14px;
+}
+
+/* SUMMARY */
+.summary-box {
+  border-top: 1px solid #eee;
+  padding-top: 12px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.summary-row.total {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* ===============================
+   ADDRESS MODAL (AMAZON STYLE)
+================================= */
+
+.address-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-box {
+  background: #fff;
+  width: 95%;
+  max-width: 500px;
+  border-radius: 14px;
+  padding: 20px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.address-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #eee;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.address-option button {
+  margin-left: auto;
+  background: none;
+  border: 1px solid #e77a87;
+  color: #e77a87;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ===============================
+   AMAZON STYLE MOBILE CHECKOUT
+   (ONLY MOBILE — desktop untouched)
+================================*/
+@media (max-width: 768px) {
+
+  /* PAGE */
+  .checkout-page {
+    padding: 0;
+    background: #f3f3f3;
+  }
+
+  .checkout-wrapper {
+    display: block;
+    width: 100%;
+  }
+
+  /* LEFT + RIGHT FULL WIDTH */
+  .checkout-left,
+  .checkout-right {
+    width: 100%;
+    padding: 12px;
+  }
+
+  /* ADDRESS CARD */
+  .address-section {
+    background: #fff;
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 12px;
+    border: 1px solid #e5e5e5;
+  }
+
+  .address-card h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .address-card p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+  }
+
+  .change-address-btn {
+    margin-top: 10px;
+    background: none;
+    border: none;
+    color: #007185;
+    font-weight: 500;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  /* CONTINUE BUTTON (AMAZON STYLE) */
+  .continue-btn {
+    width: 100%;
+    border: none;
+    background: #e77a87;
+    color: #fff;
+    height: 48px;
+    border-radius: 999px;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 10px 0 14px;
+    cursor: pointer;
+  }
+
+  /* PAYMENT TITLE */
+  .payment-title {
+    font-size: 20px;
+    margin: 12px 0;
+    font-weight: 700;
+  }
+
+  /* PAYMENT CARDS */
+  .payment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .payment-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .payment-card input {
+    margin-top: 5px;
+    transform: scale(1.2);
+  }
+
+  .payment-card h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .payment-card p {
+    margin: 2px 0 0;
+    font-size: 13px;
+    color: #666;
+  }
+
+  /* BILLING */
+  .radio {
+    background: #fff;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid #e5e5e5;
+    margin-top: 8px;
+    display: flex;
+    gap: 8px;
+    font-size: 14px;
+  }
+
+  /* ORDER SUMMARY */
+  .checkout-right {
+    margin-top: 14px;
+  }
+
+  .order-preview {
+    background: #fff;
+    border-radius: 12px;
+    padding: 12px;
+    border: 1px solid #eee;
+  }
+
+  .preview-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f2f2f2;
+  }
+
+  .preview-item:last-child {
+    border-bottom: none;
+  }
+
+  .preview-item img {
+    width: 55px;
+    height: 55px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .preview-item p {
+    font-size: 14px;
+    margin: 0;
+    font-weight: 500;
+  }
+
+  .preview-item span {
+    font-size: 12px;
+    color: #666;
+  }
+
+  .preview-item strong {
+    margin-left: auto;
+    font-size: 14px;
+  }
+
+  /* TOTAL BOX */
+  .summary-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 14px;
+    margin-top: 10px;
+    border: 1px solid #eee;
+  }
+
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+
+  .summary-row.total {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* STICKY PAY BUTTON (AMAZON STYLE) */
+  .pay-btn {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    background: #e77a87;
+    color: #fff;
+    border: none;
+    height: 52px;
+    border-radius: 999px;
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 14px;
+    z-index: 30;
+  }
+
+}
+/* ===================================
+   HEADER COLLISION FIX (GLOBAL)
+=================================== */
+
+/* desktop spacing */
+.checkout-page {
+  padding-top: 110px; /* adjust to your navbar height */
+}
+
+/* if header is sticky/fixed */
+header,
+.navbar {
+  z-index: 9999;
+}
+
+/* ===================================
+   MOBILE HEADER FIX
+=================================== */
+@media (max-width: 768px) {
+
+  .checkout-page {
+    padding-top: 85px; /* mobile navbar height */
+  }
+
+  .checkout-wrapper {
+    margin-top: 0;
+  }
+
+}

@@ -1,0 +1,188 @@
+.admin-products {
+  padding: 30px;
+  background: #f5f6fa;
+  min-height: 100vh;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #111;
+}
+
+/* ================= FORM ================= */
+
+.product-form {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+  margin-bottom: 40px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.form-grid input,
+.form-grid select {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.form-grid input:focus,
+.form-grid select:focus {
+  border-color: #111;
+}
+
+.discount-box {
+  background: #f1f3f7;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: #111;
+}
+
+.bestseller {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+/* ================= DROP ZONE ================= */
+
+.drop-zone {
+  border: 2px dashed #ccc;
+  padding: 25px;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  background: #fafafa;
+}
+
+.drop-zone:hover {
+  border-color: #111;
+  background: #f3f3f3;
+}
+
+/* ================= PREVIEW ================= */
+
+.preview-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.preview-card {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #eee;
+}
+
+.preview-card img,
+.preview-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.preview-actions {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background: rgba(0,0,0,0.6);
+}
+
+.preview-actions button {
+  border: none;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  padding: 5px;
+}
+
+/* ================= BUTTON ================= */
+
+.save-btn {
+  margin-top: 20px;
+  background: #111;
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.save-btn:hover {
+  background: #333;
+}
+
+/* ================= LIVE PRODUCTS ================= */
+
+.live-title {
+  margin-bottom: 15px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.live-products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px,1fr));
+  gap: 20px;
+}
+
+.admin-product-card {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-product-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  object-fit: contain;
+  background: #fff;
+}
+
+.admin-product-card input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.delete-btn {
+  background: crimson;
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.delete-btn:hover {
+  background: darkred;
+}

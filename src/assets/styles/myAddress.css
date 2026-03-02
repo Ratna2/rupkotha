@@ -1,0 +1,324 @@
+/* ===============================
+   PAGE BASE
+================================= */
+
+.address-page,
+.address-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  background: #fafafa;
+  padding-top: 110px; /* navbar space */
+  font-family: "Poppins", sans-serif;
+}
+
+.address-main {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* ===============================
+   TITLES
+================================= */
+
+.title,
+.address-wrapper h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 22px;
+}
+
+/* ===============================
+   BUTTONS
+================================= */
+
+.btn-center {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.add-btn,
+.save-btn {
+  background: linear-gradient(135deg,#e77a87,#d65f6e);
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-btn:hover,
+.save-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* ===============================
+   FORM
+================================= */
+
+.address-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  border: 1px solid #eee;
+  margin-bottom: 25px;
+}
+
+.address-form input,
+.address-form select {
+  height: 46px;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  padding: 0 12px;
+  font-size: 14px;
+  outline: none;
+  width: 100%;
+}
+
+.address-form input:focus,
+.address-form select:focus {
+  border-color: #e77a87;
+}
+
+.check {
+  grid-column: span 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.save-btn {
+  grid-column: span 2;
+  height: 46px;
+}
+
+/* ===============================
+   ADDRESS LIST
+================================= */
+
+.address-list {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 18px;
+}
+
+.address-card {
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 14px;
+  padding: 18px;
+  position: relative;
+  transition: 0.3s;
+}
+
+.address-card:hover {
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.address-card h4 {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.address-card p {
+  font-size: 14px;
+  color: #555;
+  margin: 3px 0;
+}
+
+.address-default-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #e77a87;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 4px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .address-default-badge {
+    font-size: 10px;
+    padding: 3px 8px;
+    top: 10px;
+    right: 10px;
+  }
+}
+
+.eta {
+  margin-top: 8px;
+  font-weight: 500;
+  color: #e77a87;
+}
+
+/* ===============================
+   CARD ACTIONS
+================================= */
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.actions button {
+  border: none;
+  background: #f5f5f5;
+  padding: 7px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.actions .delete {
+  background: #ffecec;
+  color: #e53935;
+}
+
+/* ===============================
+   🔥 MOBILE AMAZON STYLE
+================================= */
+
+@media (max-width: 768px) {
+
+  .address-page,
+  .address-wrapper {
+    padding-top: 85px; /* mobile navbar */
+  }
+
+  .address-main {
+    padding: 14px;
+  }
+
+  .title,
+  .address-wrapper h2 {
+    font-size: 22px;
+    margin-bottom: 16px;
+  }
+
+  /* FORM = SINGLE COLUMN */
+  .address-form {
+    grid-template-columns: 1fr;
+    padding: 14px;
+    gap: 10px;
+    border-radius: 12px;
+  }
+
+  .check,
+  .save-btn {
+    grid-column: span 1;
+  }
+
+  .address-form input,
+  .address-form select {
+    height: 44px;
+    font-size: 14px;
+  }
+
+  /* AMAZON STYLE CARDS */
+  .address-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .address-card {
+    border-radius: 12px;
+    padding: 14px;
+  }
+
+  .address-card h4 {
+    font-size: 16px;
+  }
+
+  .address-card p {
+    font-size: 13px;
+  }
+
+  .actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .actions button {
+    width: 100%;
+    font-size: 13px;
+    padding: 9px;
+  }
+
+  .add-btn,
+  .save-btn {
+    width: 100%;
+    height: 44px;
+    border-radius: 10px;
+    font-size: 15px;
+  }
+}
+/* ===============================
+   DEFAULT ADDRESS CHECKBOX FIX
+================================= */
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-top: 6px;
+}
+
+/* RESET BIG BROWSER STYLE */
+.check input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #e77a87;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  background: white;
+  flex-shrink: 0;
+}
+
+/* CHECK ICON */
+.check input[type="checkbox"]:checked {
+  background: #e77a87;
+}
+
+.check input[type="checkbox"]:checked::after {
+  content: "✓";
+  color: white;
+  font-size: 12px;
+  position: absolute;
+  top: -1px;
+  left: 3px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .check {
+    font-size: 13px;
+    gap: 8px;
+  }
+
+  .check input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+  }
+}
