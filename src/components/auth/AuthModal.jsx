@@ -4,6 +4,9 @@ import Login from "../../auth/pages/Login";
 import Signup from "../../auth/pages/Signup";
 import "../../assets/styles/authModal.css";
 
+// ✅ FIXED: Proper Vite image import
+import logo from "../../assets/images/logo-gold.png";
+
 const AuthModal = ({ isOpen, onClose }) => {
   const [mode, setMode] = useState("login");
   const leftRef = useRef(null);
@@ -71,16 +74,17 @@ const AuthModal = ({ isOpen, onClose }) => {
           >
             <div className="gold-overlay"></div>
 
-            {/* Big Half Visible Background Logo */}
+            {/* ✅ FIXED Background Logo */}
             <img
-              src="/src/assets/images/logo-gold.png"
+              src={logo}
               alt="Background Logo"
               className="bg-logo"
             />
 
             <div className="brand-wrapper">
+              {/* ✅ FIXED Main Logo */}
               <img
-                src="/src/assets/images/logo-gold.png"
+                src={logo}
                 alt="Rupkotha Logo"
                 className="brand-logo"
               />
