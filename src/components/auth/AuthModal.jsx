@@ -91,7 +91,7 @@ const AuthModal = ({ isOpen, onClose }) => {
 
               <h2 className="brand-title">Rupkotha</h2>
               <p className="brand-tagline">
-                Premium Jewellery Experience
+                Premium Bridal Accessories Store
               </p>
             </div>
           </div>

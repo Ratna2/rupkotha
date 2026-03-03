@@ -1,0 +1,47 @@
+.legal-container {
+  max-width: 1000px;
+  margin: 120px auto 80px auto;
+  padding: 0 20px;
+  font-family: "Inter", sans-serif;
+  color: #111;
+  line-height: 1.7;
+}
+
+.legal-header {
+  margin-bottom: 50px;
+}
+
+.legal-header h1 {
+  font-size: 36px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.legal-subtitle {
+  font-size: 14px;
+  color: #777;
+}
+
+.legal-content h2 {
+  margin-top: 40px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.legal-content h3 {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.legal-content p {
+  margin: 12px 0;
+}
+
+.legal-content ul {
+  margin: 10px 0 10px 20px;
+}
+
+.legal-content li {
+  margin-bottom: 8px;
+}

@@ -22,6 +22,10 @@ import Enquiry from "./admin/pages/Enquiry";
 import AdminRoute from "./components/AdminRoute";
 import AdminLogin from "./admin/pages/AdminLogin";
 
+import ShippingReturns from "./pages/ShippingReturns";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsConditions from "./pages/TermsConditions";
+
 function App() {
   return (
     <>
@@ -43,6 +47,10 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/checkout" element={<Checkout />} />
+
+          <Route path="/shipping-returns" element={<ShippingReturns />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-conditions" element={<TermsConditions />} />
         </Route>
 
         {/* ADMIN LOGIN (PUBLIC PAGE) */}

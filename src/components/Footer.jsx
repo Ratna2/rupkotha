@@ -19,7 +19,6 @@ function Footer() {
             Crafting dreams with authentic Bengali bridal excellence.
           </p>
 
-          {/* Social Icons */}
           <div className="flex gap-4">
             <a
               href="https://www.instagram.com/rupkotha_officials?igsh=bmNmN2d3a3Qxb2k2"
@@ -72,34 +71,33 @@ function Footer() {
             POLICIES
           </h4>
 
-          {/* 🔥 FIXED PART */}
-          <ul className="space-y-3 text-gray-400 text-sm flex flex-col items-start">
+          {/* ✅ FIXED HERE */}
+          <ul className="space-y-3 text-gray-400 text-sm">
             <li>
-              <button
-                type="button"
-                className="bg-transparent hover:bg-transparent focus:bg-transparent active:bg-transparent 
-                p-0 m-0 border-none outline-none text-left hover:text-[#c6a75e] transition"
+              <Link
+                to="/shipping-returns"
+                className="hover:text-[#c6a75e] transition"
               >
                 Shipping & Returns
-              </button>
+              </Link>
             </li>
+
             <li>
-              <button
-                type="button"
-                className="bg-transparent hover:bg-transparent focus:bg-transparent active:bg-transparent 
-                p-0 m-0 border-none outline-none text-left hover:text-[#c6a75e] transition"
+              <Link
+                to="/privacy-policy"
+                className="hover:text-[#c6a75e] transition"
               >
                 Privacy Policy
-              </button>
+              </Link>
             </li>
+
             <li>
-              <button
-                type="button"
-                className="bg-transparent hover:bg-transparent focus:bg-transparent active:bg-transparent 
-                p-0 m-0 border-none outline-none text-left hover:text-[#c6a75e] transition"
+              <Link
+                to="/terms-conditions"
+                className="hover:text-[#c6a75e] transition"
               >
                 Terms & Conditions
-              </button>
+              </Link>
             </li>
           </ul>
         </div>
@@ -115,17 +113,17 @@ function Footer() {
             <div className="flex items-start gap-3">
               <MapPin className="w-5 h-5 text-[#c6a75e]" />
               <p>
-                Agartala, West Tripura, 799001
+                Old RMS Chowmoni, Above W Showroom, Agartala, Tripura, 799001
               </p>
             </div>
 
             <div className="flex items-center gap-3">
               <Phone className="w-5 h-5 text-[#c6a75e]" />
               <a
-                href="tel:+919876543210"
+                href="tel:+91936690634"
                 className="hover:text-[#c6a75e] transition"
               >
-                +91 98765 43210
+                +91 93669 00634
               </a>
             </div>
 
@@ -143,7 +141,6 @@ function Footer() {
         </div>
       </div>
 
-      {/* Divider */}
       <div className="border-t border-gray-800 mt-16 pt-6 text-center text-gray-500 text-sm">
         ©️ {new Date().getFullYear()} Rupkotha. All rights reserved.
         Crafted with love for Bengali brides.
