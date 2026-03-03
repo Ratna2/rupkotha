@@ -1,26 +1,8 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-
 function AboutContent() {
-  const ref = useRef(null);
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 80%", "end 20%"]
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 1], [0, 1, 0]);
-  const y = useTransform(scrollYProgress, [0, 0.5, 1], [60, 0, -60]);
-
   return (
-    <section
-      ref={ref}
-      className="relative bg-white py-24 md:py-32 px-6 overflow-hidden"
-    >
-      <motion.div
-        style={{ opacity, y }}
-        className="max-w-4xl mx-auto text-center"
-      >
+    <section className="relative bg-white py-24 md:py-32 px-6 overflow-hidden">
+      <div className="max-w-4xl mx-auto text-center">
+        
         {/* BIG HEADING */}
         <h2 className="font-serif text-4xl md:text-6xl tracking-tight text-black leading-tight mb-12">
           Where Tradition Meets Modern Grace
@@ -51,7 +33,8 @@ function AboutContent() {
             timeless traditions.
           </p>
         </div>
-      </motion.div>
+
+      </div>
     </section>
   );
 }

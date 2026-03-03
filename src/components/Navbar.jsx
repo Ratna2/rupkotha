@@ -7,6 +7,9 @@ import { FiHeart, FiShoppingCart, FiUser } from "react-icons/fi";
 import { useAuth } from "../context/AuthContext";
 import AuthModal from "../components/auth/AuthModal";
 
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase"; // ⚠️ make sure path is correct
+
 import "../assets/styles/navbar.css";
 
 const Navbar = () => {
@@ -21,6 +24,8 @@ const Navbar = () => {
   const [profileOpen, setProfileOpen] = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
 
+  const [username, setUsername] = useState(""); // ✅ NEW STATE
+
   const profileRef = useRef(null);
 
   const cartCount = cart.reduce((t, i) => t + i.quantity, 0);
@@ -32,6 +37,30 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  /* ---------------- Fetch Username From Firestore ---------------- */
+  useEffect(() => {
+    const fetchUsername = async () => {
+      if (user?.uid) {
+        try {
+          const docRef = doc(db, "users", user.uid);
+          const docSnap = await getDoc(docRef);
+
+          if (docSnap.exists()) {
+            setUsername(docSnap.data().username || "");
+          } else {
+            setUsername("");
+          }
+        } catch (error) {
+          console.error("Error fetching username:", error);
+        }
+      } else {
+        setUsername("");
+      }
+    };
+
+    fetchUsername();
+  }, [user]);
 
   /* ---------------- Click Outside Profile ---------------- */
   useEffect(() => {
@@ -49,8 +78,7 @@ const Navbar = () => {
     if (!user) {
       const timer = setTimeout(() => {
         setAuthModalOpen(true);
-      }, 480000); // 8 minutes
-
+      }, 480000);
       return () => clearTimeout(timer);
     }
   }, [user]);
@@ -92,6 +120,17 @@ const Navbar = () => {
       setIsCartOpen(true);
     }
   };
+
+  /* ---------------- FINAL Display Name Logic ---------------- */
+  let displayName = "";
+
+  if (username) {
+    displayName = username; // Email signup username
+  } else if (user?.displayName) {
+    displayName = user.displayName.split(" ")[0]; // Google login first name
+  } else if (user?.email) {
+    displayName = user.email; // fallback
+  }
 
   const isHome = location.pathname === "/";
   const navbarClass =
@@ -139,8 +178,7 @@ const Navbar = () => {
 
               {profileOpen && user && (
                 <div className="profile-dropdown">
-                  <h3>{user?.displayName || "User"}</h3>
-                  <p>{user?.email}</p>
+                  <h3>{displayName}</h3>
 
                   <div onClick={() => navigate("/account/profile")}>
                     Personal Information

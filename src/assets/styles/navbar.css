@@ -221,3 +221,95 @@
   }
 
 }
+.account-header {
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.account-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #c6a75e, #f5e1a4);
+  color: #000;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.account-name {
+  font-weight: 600;
+  font-size: 15px;
+}
+.profile-wrapper {
+  position: relative;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 48px;              /* pushes below icon */
+  right: 0;               /* aligns to right side of icon */
+  width: 240px;           /* fixed clean width */
+  
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 18px 0;
+  
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.08),
+    0 2px 6px rgba(0, 0, 0, 0.05);
+
+  z-index: 999;
+}
+
+/* Header Name */
+.profile-dropdown h3 {
+  font-size: 15px;
+  font-weight: 600;
+  padding: 0 20px 12px 20px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+/* Dropdown Items */
+.profile-dropdown div {
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.profile-dropdown div:hover {
+  background: #f9f9f9;
+}
+
+/* Logout styling */
+.profile-dropdown .logout {
+  color: #d32f2f;
+  font-weight: 500;
+}
+/* ========================= */
+/* MOBILE PROFILE DROPDOWN FIX */
+/* ========================= */
+
+@media (max-width: 768px) {
+
+  .profile-dropdown {
+    position: fixed;        /* detach from navbar */
+    top: 70px;              /* below navbar */
+    right: 10px;
+    left: 10px;             /* full width with padding */
+    width: auto;            /* prevent overflow */
+    
+    border-radius: 16px;
+    padding: 20px 0;
+
+    z-index: 1000;
+  }
+
+}

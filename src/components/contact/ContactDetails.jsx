@@ -29,8 +29,8 @@ function ContactDetails() {
           <div>
             <h4 className="font-medium text-lg mb-1">Visit Our Showroom</h4>
             <p className="text-stone-600 text-sm">
-              123 Park Street<br />
-              Kolkata, West Bengal 700016<br />
+              Old RMS Chowmoni, Above W Showroom<br />
+              Agartala, Tripura, 799001<br />
               India
             </p>
           </div>
@@ -44,10 +44,10 @@ function ContactDetails() {
           <div>
             <h4 className="font-medium text-lg mb-1">Call Us</h4>
             <a
-              href="tel:+919876543210"
+              href="tel:+919366900634"
               className="text-stone-600 text-sm hover:text-black transition"
             >
-              +91 98765 43210
+              +91 93669 00634
             </a>
             <p className="text-stone-500 text-xs mt-1">
               Mon – Sat: 10 AM – 7 PM
