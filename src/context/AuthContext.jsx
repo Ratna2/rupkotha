@@ -18,10 +18,15 @@ export function AuthProvider({ children }) {
       setUser(u);
 
       if (u) {
-        const adminRef = doc(db, "admins", u.uid);
-        const snap = await getDoc(adminRef);
+        try {
+          const adminRef = doc(db, "admins", u.uid);
+          const snap = await getDoc(adminRef);
 
-        setIsAdmin(snap.exists());
+          setIsAdmin(snap.exists());
+        } catch (error) {
+          console.error("Admin check error:", error);
+          setIsAdmin(false);
+        }
       } else {
         setIsAdmin(false);
       }
@@ -29,10 +34,12 @@ export function AuthProvider({ children }) {
       setLoading(false);
     });
 
-    return unsubscribe;
+    return () => unsubscribe();
   }, []);
 
-  const logout = () => signOut(auth);
+  const logout = async () => {
+    await signOut(auth);
+  };
 
   return (
     <AuthContext.Provider

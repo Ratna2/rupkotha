@@ -1,12 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { useShop } from "../../context/ShopContext";
 import { getProductRating } from "../../collection/review";
+import useRequireAuth from "../../hooks/useRequireAuth";
 import { useState, useEffect } from "react";
 
 function ProductCard({ product }) {
   const navigate = useNavigate();
 
   const { addToCart, toggleWishlist, wishlist } = useShop();
+  const requireAuth = useRequireAuth();
 
   const liked = wishlist.includes(product.id);
 
@@ -87,7 +89,7 @@ function ProductCard({ product }) {
           className={`wishlist ${liked ? "active" : ""}`}
           onClick={(e) => {
             e.stopPropagation();
-            toggleWishlist(product);
+            requireAuth(() => toggleWishlist(product));
           }}
         >
           <svg viewBox="0 0 24 24" className="heart-icon">
@@ -153,7 +155,9 @@ function ProductCard({ product }) {
           disabled={outOfStock}
           onClick={(e) => {
             e.stopPropagation();
-            addToCart({ ...product, quantity: 1 });
+            requireAuth(() =>
+              addToCart({ ...product, quantity: 1 })
+            );
           }}
         >
           {outOfStock ? "Out Of Stock" : "Add to Cart"}

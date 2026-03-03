@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useShop } from "../context/ShopContext";
 import { getProducts } from "../admin/services/productService";
+import useRequireAuth from "../hooks/useRequireAuth";
 import {
   getReviewsByProduct,
   getProductRating
@@ -14,6 +15,7 @@ function ProductDetails() {
 
   const { id } = useParams();
   const { addToCart, toggleWishlist, wishlist } = useShop();
+  const requireAuth = useRequireAuth();
 
   const [products, setProducts] = useState([]);
   const [product, setProduct] = useState(null);
@@ -137,14 +139,20 @@ function ProductDetails() {
 
           <button
             className="cart-btn"
-            onClick={()=>addToCart({...product,quantity})}
+            onClick={() =>
+              requireAuth(() =>
+                addToCart({ ...product,quantity })
+              )
+            }
           >
             Add To Cart
           </button>
 
           <button
             className="wishlist-btn"
-            onClick={()=>toggleWishlist(product)}
+            onClick={() =>
+              requireAuth(() => toggleWishlist(product))
+            }
           >
             {isWishlisted ? "❤️ Wishlisted" : "♡ Add to Wishlist"}
           </button>

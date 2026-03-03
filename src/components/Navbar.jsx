@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useShop } from "../context/ShopContext";
 import { FiHeart, FiShoppingCart, FiUser } from "react-icons/fi";
 import { useAuth } from "../context/AuthContext";
+import AuthModal from "../components/auth/AuthModal";
 
 import "../assets/styles/navbar.css";
 
@@ -18,18 +19,21 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [authModalOpen, setAuthModalOpen] = useState(false);
 
   const profileRef = useRef(null);
 
   const cartCount = cart.reduce((t, i) => t + i.quantity, 0);
   const wishlistCount = wishlist.length;
 
+  /* ---------------- Scroll Effect ---------------- */
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  /* ---------------- Click Outside Profile ---------------- */
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (profileRef.current && !profileRef.current.contains(e.target)) {
@@ -39,6 +43,27 @@ const Navbar = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  /* ---------------- Auto Login Reminder (8 mins) ---------------- */
+  useEffect(() => {
+    if (!user) {
+      const timer = setTimeout(() => {
+        setAuthModalOpen(true);
+      }, 480000); // 8 minutes
+
+      return () => clearTimeout(timer);
+    }
+  }, [user]);
+
+  /* ---------------- Lock Body Scroll When Modal Open ---------------- */
+  useEffect(() => {
+    if (authModalOpen) {
+      document.body.style.overflow = "hidden";
+      setProfileOpen(false);
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [authModalOpen]);
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -52,12 +77,25 @@ const Navbar = () => {
     navigate("/");
   };
 
-  /* 🔥 NEW LOGIC (transparent only on home top) */
+  const handleWishlistClick = () => {
+    if (!user) {
+      setAuthModalOpen(true);
+    } else {
+      navigate("/wishlist");
+    }
+  };
+
+  const handleCartClick = () => {
+    if (!user) {
+      setAuthModalOpen(true);
+    } else {
+      setIsCartOpen(true);
+    }
+  };
+
   const isHome = location.pathname === "/";
   const navbarClass =
-    isHome && !isScrolled
-      ? "navbar"
-      : "navbar scrolled";
+    isHome && !isScrolled ? "navbar" : "navbar scrolled";
 
   return (
     <>
@@ -88,21 +126,37 @@ const Navbar = () => {
             <div className="profile-wrapper" ref={profileRef}>
               <div
                 className="icon-wrapper"
-                onClick={() => setProfileOpen(!profileOpen)}
+                onClick={() => {
+                  if (!user) {
+                    setAuthModalOpen(true);
+                  } else {
+                    setProfileOpen(!profileOpen);
+                  }
+                }}
               >
                 <FiUser size={22} />
               </div>
 
-              {profileOpen && (
+              {profileOpen && user && (
                 <div className="profile-dropdown">
                   <h3>{user?.displayName || "User"}</h3>
                   <p>{user?.email}</p>
 
-                  <div onClick={() => navigate("/account/profile")}>Personal Information</div>
-                  <div onClick={() => navigate("/account/orders")}>My Orders</div>
-                  <div onClick={() => navigate("/account/history")}>My Order History</div>
-                  <div onClick={() => navigate("/account/address")}>My Address</div>
-                  <div onClick={() => navigate("/wishlist")}>My Wishlist</div>
+                  <div onClick={() => navigate("/account/profile")}>
+                    Personal Information
+                  </div>
+                  <div onClick={() => navigate("/account/orders")}>
+                    My Orders
+                  </div>
+                  <div onClick={() => navigate("/account/history")}>
+                    My Order History
+                  </div>
+                  <div onClick={() => navigate("/account/address")}>
+                    My Address
+                  </div>
+                  <div onClick={() => navigate("/wishlist")}>
+                    My Wishlist
+                  </div>
 
                   <div className="logout" onClick={handleLogout}>
                     Logout
@@ -112,7 +166,7 @@ const Navbar = () => {
             </div>
 
             {/* WISHLIST */}
-            <div className="icon-wrapper" onClick={() => navigate("/wishlist")}>
+            <div className="icon-wrapper" onClick={handleWishlistClick}>
               <FiHeart size={22} />
               {wishlistCount > 0 && (
                 <span className="icon-badge">{wishlistCount}</span>
@@ -120,7 +174,7 @@ const Navbar = () => {
             </div>
 
             {/* CART */}
-            <div className="icon-wrapper" onClick={() => setIsCartOpen(true)}>
+            <div className="icon-wrapper" onClick={handleCartClick}>
               <FiShoppingCart size={22} />
               {cartCount > 0 && (
                 <span className="icon-badge">{cartCount}</span>
@@ -161,6 +215,12 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Auth Modal */}
+      <AuthModal
+        isOpen={authModalOpen}
+        onClose={() => setAuthModalOpen(false)}
+      />
     </>
   );
 };

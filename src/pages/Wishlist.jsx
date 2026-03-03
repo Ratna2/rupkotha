@@ -3,6 +3,8 @@ import { useShop } from "../context/ShopContext";
 import { FiTrash2 } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { getProductRating } from "../collection/review";
+import useRequireAuth from "../hooks/useRequireAuth";
+
 import "../assets/styles/wishlist.css";
 
 function Wishlist() {
@@ -18,6 +20,7 @@ function Wishlist() {
 
   const [confirmRemove, setConfirmRemove] = useState(null);
   const [toast, setToast] = useState("");
+  const requireAuth = useRequireAuth();
 
   // ⭐ NEW: ratings state (FIX)
   const [ratingsMap, setRatingsMap] = useState({});
@@ -50,11 +53,13 @@ function Wishlist() {
 
   // 🔥 MOVE TO CART
   const handleMoveToCart = (product) => {
-    addToCart({ ...product, quantity: 1 });
-    toggleWishlist(product);
+    requireAuth(() => {
+      addToCart({ ...product, quantity: 1 });
+      toggleWishlist(product);
 
-    setToast("Item moved to cart ❤️");
-    setTimeout(() => setToast(""), 3000);
+      setToast("Item moved to cart ❤️");
+      setTimeout(() => setToast(""), 3000);
+    });
   };
 
   return (

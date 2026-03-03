@@ -24,43 +24,46 @@ import AdminLogin from "./admin/pages/AdminLogin";
 
 function App() {
   return (
-    <Routes>
+    <>
 
-      {/* PUBLIC WEBSITE */}
-      <Route element={<Layout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/product/:id" element={<ProductDetails />} />
+      <Routes>
 
-        <Route path="/account/profile" element={<PersonalInfo />} />
-        <Route path="/account/address" element={<MyAddress />} />
-        <Route path="/account/add-address" element={<AddAddress />} />
+        {/* PUBLIC WEBSITE */}
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
 
-        <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/checkout" element={<Checkout />} />
-      </Route>
+          <Route path="/account/profile" element={<PersonalInfo />} />
+          <Route path="/account/address" element={<MyAddress />} />
+          <Route path="/account/add-address" element={<AddAddress />} />
 
-      {/* ADMIN LOGIN (PUBLIC PAGE) */}
-      <Route path="/admin-login" element={<AdminLogin />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/checkout" element={<Checkout />} />
+        </Route>
 
-      {/* ADMIN PROTECTED ROUTES */}
-      <Route
-        path="/admin"
-        element={
-          <AdminRoute>
-            <AdminLayout />
-          </AdminRoute>
-        }
-      >
-        <Route index element={<Dashboard />} />
-        <Route path="products" element={<Products />} />
-        <Route path="enquiry" element={<Enquiry />} />
-      </Route>
+        {/* ADMIN LOGIN (PUBLIC PAGE) */}
+        <Route path="/admin-login" element={<AdminLogin />} />
 
-    </Routes>
+        {/* ADMIN PROTECTED ROUTES */}
+        <Route
+          path="/admin"
+          element={
+            <AdminRoute>
+              <AdminLayout />
+            </AdminRoute>
+          }
+        >
+          <Route index element={<Dashboard />} />
+          <Route path="products" element={<Products />} />
+          <Route path="enquiry" element={<Enquiry />} />
+        </Route>
+
+      </Routes>
+    </>
   );
 }
 
