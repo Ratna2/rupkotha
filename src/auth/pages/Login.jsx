@@ -38,23 +38,45 @@ export default function Login({ isModal = false, onClose }) {
     }
   };
 
-  // 🔥 GOOGLE LOGIN (ignore popup close error)
+  // 🔥 GOOGLE LOGIN (FULL SAFE HANDLER)
   const handleGoogleLogin = async () => {
     try {
+
       setError("");
       setResetMessage("");
+      setLoading(true);
 
-      await googleLogin();
+      const user = await googleLogin();
 
-      if(isModal && onClose){
+      // if login success close modal
+      if(user && isModal && onClose){
         onClose();
       }
 
     } catch (err) {
-      // If user manually closes popup, don't show error
-      if (err.code !== "auth/popup-closed-by-user") {
-        setError("Google login failed");
+
+      // Ignore popup closed by user
+      if (err.code === "auth/popup-closed-by-user") {
+        return;
       }
+
+      // Popup blocked
+      if (err.code === "auth/popup-blocked") {
+        setError("Popup blocked. Please allow popups and try again.");
+        return;
+      }
+
+      // Unauthorized domain
+      if (err.code === "auth/unauthorized-domain") {
+        setError("Domain not authorized for Google login.");
+        return;
+      }
+
+      console.error("Google Login Error:", err);
+      setError("Google login failed. Please try again.");
+
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -185,12 +207,13 @@ export default function Login({ isModal = false, onClose }) {
           type="button"
           className="google-modern-btn"
           onClick={handleGoogleLogin}
+          disabled={loading}
         >
           <img
             src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
             alt="Google"
             className="google-icon"
-          />    
+          />
           Continue with Google
         </button>
 

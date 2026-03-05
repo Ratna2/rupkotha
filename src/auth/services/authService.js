@@ -39,7 +39,7 @@ export const registerUser = async (data) => {
     phone: data.phone,
     email: data.email,
     role: "customer",
-    isVerified: false, // will update after verification
+    isVerified: false,
     createdAt: new Date()
   });
 
@@ -56,7 +56,7 @@ export const loginUser = async (email, password) => {
     password
   );
 
-  // 🔥 IMPORTANT: Reload to get latest verification state
+  // 🔥 Reload to get latest verification state
   await userCredential.user.reload();
 
   if (!userCredential.user.emailVerified) {
@@ -65,38 +65,73 @@ export const loginUser = async (email, password) => {
 
   // ✅ Update Firestore verification status if verified
   const userRef = doc(db, "users", userCredential.user.uid);
-  await updateDoc(userRef, {
-    isVerified: true
-  });
+
+  const userSnap = await getDoc(userRef);
+
+  if (userSnap.exists()) {
+    await updateDoc(userRef, {
+      isVerified: true
+    });
+  }
 
   return userCredential;
 };
 
 
 
-// 🔥 GOOGLE LOGIN
+// 🔥 GOOGLE LOGIN (UPGRADED FOR LIVE DOMAIN)
 export const googleLogin = async () => {
-  const result = await signInWithPopup(auth, googleProvider);
-  const user = result.user;
+  try {
 
-  const userRef = doc(db, "users", user.uid);
-  const userSnap = await getDoc(userRef);
+    const result = await signInWithPopup(auth, googleProvider);
+    const user = result.user;
 
-  if (!userSnap.exists()) {
-    await setDoc(userRef, {
-      uid: user.uid,
-      firstName: user.displayName?.split(" ")[0] || "",
-      lastName: user.displayName?.split(" ")[1] || "",
-      username: user.displayName || "",
-      phone: user.phoneNumber || "",
-      email: user.email,
-      role: "customer",
-      isVerified: true, // Google accounts are verified
-      createdAt: new Date()
-    });
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
+
+    // ✅ If user doesn't exist create new Firestore profile
+    if (!userSnap.exists()) {
+
+      const firstName = user.displayName?.split(" ")[0] || "";
+      const lastName = user.displayName?.split(" ")[1] || "";
+
+      await setDoc(userRef, {
+        uid: user.uid,
+        firstName: firstName,
+        lastName: lastName,
+        username: user.displayName || "",
+        phone: user.phoneNumber || "",
+        email: user.email,
+        role: "customer",
+        isVerified: true,
+        createdAt: new Date()
+      });
+
+    }
+
+    return result;
+
+  } catch (error) {
+
+    console.error("Google Login Error:", error);
+
+    // Ignore popup close
+    if (error.code === "auth/popup-closed-by-user") {
+      throw error;
+    }
+
+    // Popup blocked
+    if (error.code === "auth/popup-blocked") {
+      throw new Error("Popup blocked. Please allow popups.");
+    }
+
+    // Unauthorized domain
+    if (error.code === "auth/unauthorized-domain") {
+      throw new Error("Domain not authorized for Google login.");
+    }
+
+    throw new Error("Google login failed.");
   }
-
-  return result;
 };
 
 
