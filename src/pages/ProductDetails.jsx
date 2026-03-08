@@ -24,9 +24,10 @@ function ProductDetails() {
 
   const [reviews, setReviews] = useState([]);
 
-  // ⭐ MISSING STATES (ADDED)
   const [rating, setRating] = useState(0);
   const [reviewCount, setReviewCount] = useState(0);
+
+  const [selectedSize, setSelectedSize] = useState("");
 
   /* =============================
      LOAD PRODUCT
@@ -56,6 +57,11 @@ function ProductDetails() {
           await getReviewsByProduct(found.id);
 
         setReviews(saved);
+
+        if(found.sizes && found.sizes.length > 0){
+          setSelectedSize(found.sizes[0]);
+        }
+
       }
     };
 
@@ -64,7 +70,7 @@ function ProductDetails() {
   }, [id]);
 
   /* =============================
-     ⭐ AUTO RATING (MOVED UP)
+     AUTO RATING
   ============================= */
   useEffect(() => {
 
@@ -90,8 +96,16 @@ function ProductDetails() {
     ? [...product.images]
     : [product.image1, product.image2].filter(Boolean);
 
+  /* =============================
+     FIXED WISHLIST CHECK
+  ============================= */
+
   const isWishlisted =
-    wishlist.some(p => p.id === product.id);
+    wishlist?.some(
+      (p) =>
+        String(p.id || p.productId) ===
+        String(product.id || product.productId)
+    );
 
   return (
     <div className="product-page">
@@ -128,7 +142,6 @@ function ProductDetails() {
 
           <h1>{product.name}</h1>
 
-          {/* ⭐ LIVE RATING */}
           <div className="product-rating">
             ⭐ {rating} | {reviewCount} Reviews
           </div>
@@ -137,24 +150,46 @@ function ProductDetails() {
             ₹{product.price}
           </div>
 
+          {/* SIZE SELECTOR */}
+          {product.sizes && product.sizes.length > 0 && (
+            <div className="size-selector">
+
+              <p>Select Size</p>
+
+              <div className="size-options">
+
+                {product.sizes.map((size,i)=>(
+                  <button
+                    key={i}
+                    className={
+                      selectedSize === size
+                        ? "size active"
+                        : "size"
+                    }
+                    onClick={()=>setSelectedSize(size)}
+                  >
+                    {size}
+                  </button>
+                ))}
+
+              </div>
+
+            </div>
+          )}
+
           <button
             className="cart-btn"
             onClick={() =>
               requireAuth(() =>
-                addToCart({ ...product,quantity })
+                addToCart({
+                  ...product,
+                  quantity,
+                  size:selectedSize
+                })
               )
             }
           >
             Add To Cart
-          </button>
-
-          <button
-            className="wishlist-btn"
-            onClick={() =>
-              requireAuth(() => toggleWishlist(product))
-            }
-          >
-            {isWishlisted ? "❤️ Wishlisted" : "♡ Add to Wishlist"}
           </button>
 
           <div className="description">

@@ -12,11 +12,11 @@ function ProductCard({ product }) {
 
   const liked = wishlist.includes(product.id);
 
-  /* ⭐ RATING STATE (NEW) */
+  /* ⭐ RATING STATE */
   const [rating, setRating] = useState(0);
   const [reviewCount, setReviewCount] = useState(0);
 
-  /* ⭐ LOAD RATING FROM FIREBASE (NEW) */
+  /* ⭐ LOAD RATING */
   useEffect(() => {
     const loadRating = async () => {
       const data = await getProductRating(product.id);
@@ -52,7 +52,7 @@ function ProductCard({ product }) {
         )
       : 0;
 
-  /* ⭐ STOCK FROM ADMIN (NEW) */
+  /* ⭐ STOCK */
   const stock = Number(product.stock || 0);
   const outOfStock = stock <= 0;
 
@@ -61,11 +61,13 @@ function ProductCard({ product }) {
       className="product-card"
       onClick={() => navigate(`/product/${product.id}`)}
     >
+
       {/* IMAGE AREA */}
       <div className="product-image">
 
+        {/* ⭐ DESKTOP BADGE */}
         {product.bestseller && (
-          <div className="badge">
+          <div className="badge desktop-badge">
             <span>BESTSELLER</span>
           </div>
         )}
@@ -96,20 +98,31 @@ function ProductCard({ product }) {
             <path d="M12.1 8.64l-.1.1-.11-.11C10.14 6.6 7.1 6.6 5.14 8.56c-1.96 1.96-1.96 5.14 0 7.1L12 22l6.86-6.34c1.96-1.96 1.96-5.14 0-7.1-1.96-1.96-5-1.96-6.76.08z" />
           </svg>
         </span>
+
       </div>
 
       {/* INFO AREA */}
       <div className="product-info">
 
-        {/* ⭐ RATING LIKE GIVA (AUTO FROM REVIEWS) */}
-        <div className="product-rating">
-          ⭐ {rating || 0}
-          <span className="review-count">
-            | {reviewCount || 0}
-          </span>
+        {/* ⭐ RATING */}
+        <div className="rating-row">
+
+          <div className="product-rating">
+            ⭐ {rating || 0}
+            <span className="review-count">
+              | {reviewCount || 0}
+            </span>
+          </div>
+
+          {product.bestseller && (
+            <span className="bestseller-tag">
+              BESTSELLER
+            </span>
+          )}
+
         </div>
 
-        {/* ⭐ STOCK TEXT */}
+        {/* ⭐ STOCK */}
         <div className="stock-text">
           {outOfStock
             ? "❌ Out of Stock"
@@ -118,7 +131,7 @@ function ProductCard({ product }) {
             : `${stock} items left`}
         </div>
 
-        {/* PRICE ROW */}
+        {/* PRICE */}
         <div className="price-row">
           <span className="final-price">
             ₹{product.price}
@@ -142,14 +155,14 @@ function ProductCard({ product }) {
           {product.name}
         </h4>
 
-        {/* COUPON TEXT */}
+        {/* COUPON */}
         {product.couponPrice && (
           <div className="coupon-text">
             Get it for ₹{product.couponPrice} with coupon
           </div>
         )}
 
-        {/* 🛒 ADD TO CART */}
+        {/* ADD CART */}
         <button
           className="add-cart-btn"
           disabled={outOfStock}

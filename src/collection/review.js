@@ -14,18 +14,28 @@ import { db } from "../firebase";
 =================================================== */
 export const getReviewsByProduct = async (productId) => {
 
-  const q = query(
-    collection(db, "reviews"),
-    where("productId", "==", productId),
-    orderBy("createdAt", "desc")
-  );
+  try {
 
-  const snap = await getDocs(q);
+    const q = query(
+      collection(db, "reviews"),
+      where("productId", "==", productId),
+      orderBy("createdAt", "desc")
+    );
 
-  return snap.docs.map(doc => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
+    const snap = await getDocs(q);
+
+    return snap.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+  } catch (err) {
+
+    console.error("GET REVIEWS ERROR:", err);
+    return [];
+
+  }
+
 };
 
 /* ===================================================
@@ -33,41 +43,51 @@ export const getReviewsByProduct = async (productId) => {
 =================================================== */
 export const addReview = async (productId, review) => {
 
-  const payload = {
-    productId,
-    verified: true,
+  try {
 
-    rating: Number(review.rating || 0),
-    text: review.text || "",
-    image: review.image || "",
+    const payload = {
+      productId,
+      verified: true,
 
-    // ⭐ NEW USER INFO
-    userName: review.userName || "User",
+      rating: Number(review.rating || 0),
+      text: review.text || "",
+      image: review.image || "",
 
-    // ⭐ DATE + TIME
-    date:
-      review.date ||
-      new Date().toLocaleDateString(),
+      // ⭐ USER INFO
+      userName: review.userName || "User",
 
-    time:
-      review.time ||
-      new Date().toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      }),
+      // ⭐ DATE + TIME
+      date:
+        review.date ||
+        new Date().toLocaleDateString(),
 
-    createdAt: serverTimestamp(),
-  };
+      time:
+        review.time ||
+        new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
 
-  const docRef = await addDoc(
-    collection(db, "reviews"),
-    payload
-  );
+      createdAt: serverTimestamp(),
+    };
 
-  return {
-    id: docRef.id,
-    ...payload,
-  };
+    const docRef = await addDoc(
+      collection(db, "reviews"),
+      payload
+    );
+
+    return {
+      id: docRef.id,
+      ...payload,
+    };
+
+  } catch (err) {
+
+    console.error("ADD REVIEW ERROR:", err);
+    return null;
+
+  }
+
 };
 
 /* ===================================================
@@ -75,7 +95,7 @@ export const addReview = async (productId, review) => {
 =================================================== */
 export const getAverageRating = (reviews) => {
 
-  if (!reviews.length) return 0;
+  if (!reviews || !reviews.length) return 0;
 
   const total = reviews.reduce(
     (sum, r) => sum + Number(r.rating || 0),
@@ -85,6 +105,7 @@ export const getAverageRating = (reviews) => {
   return Number(
     (total / reviews.length).toFixed(1)
   );
+
 };
 
 /* ===================================================
@@ -92,11 +113,69 @@ export const getAverageRating = (reviews) => {
 =================================================== */
 export const getProductRating = async (productId) => {
 
-  const reviews =
-    await getReviewsByProduct(productId);
+  try {
 
-  return {
-    rating: getAverageRating(reviews),
-    reviewCount: reviews.length,
-  };
+    const reviews =
+      await getReviewsByProduct(productId);
+
+    return {
+      rating: getAverageRating(reviews),
+      reviewCount: reviews.length,
+    };
+
+  } catch (err) {
+
+    console.error("PRODUCT RATING ERROR:", err);
+
+    return {
+      rating: 0,
+      reviewCount: 0,
+    };
+
+  }
+
+};
+
+/* ===================================================
+   ⭐ GET ALL REVIEWS (FOR HOMEPAGE TESTIMONIALS)
+=================================================== */
+export const getAllReviews = async () => {
+
+  try {
+
+    const snap = await getDocs(
+      collection(db, "reviews")
+    );
+
+    const reviews = snap.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    // Safe timestamp sorting
+    reviews.sort((a, b) => {
+
+      const aTime =
+        a.createdAt?.seconds ||
+        a.createdAt?.toDate?.()?.getTime?.() ||
+        0;
+
+      const bTime =
+        b.createdAt?.seconds ||
+        b.createdAt?.toDate?.()?.getTime?.() ||
+        0;
+
+      return bTime - aTime;
+
+    });
+
+    return reviews;
+
+  } catch (err) {
+
+    console.error("GET ALL REVIEWS ERROR:", err);
+    return [];
+
+  }
+
 };

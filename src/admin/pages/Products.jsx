@@ -20,6 +20,11 @@ function Products() {
     gender: "female",
     occasion: "wedding",
     bestseller: false,
+
+    // ✅ NEW
+    featured: false,
+    productType: "products",
+    sizes: []
   });
 
   const [files, setFiles] = useState([]);
@@ -56,6 +61,23 @@ function Products() {
   };
 
   // ======================
+  // SIZE HANDLING (NEW)
+  // ======================
+  const toggleSize = (size) => {
+    if (form.sizes.includes(size)) {
+      setForm({
+        ...form,
+        sizes: form.sizes.filter((s) => s !== size),
+      });
+    } else {
+      setForm({
+        ...form,
+        sizes: [...form.sizes, size],
+      });
+    }
+  };
+
+  // ======================
   // MEDIA HANDLING
   // ======================
   const handleFiles = (selected) => {
@@ -65,9 +87,8 @@ function Products() {
       arr.map((f) => ({
         url: URL.createObjectURL(f),
         type: f.type,
-
-    }))
-   );
+      }))
+    );
   };
 
   const removeMedia = (index) => {
@@ -130,6 +151,9 @@ function Products() {
         gender: "female",
         occasion: "wedding",
         bestseller: false,
+        featured: false,
+        productType: "products",
+        sizes: []
       });
 
       setFiles([]);
@@ -169,6 +193,17 @@ function Products() {
       <form className="product-form" onSubmit={handleSubmit}>
 
         <div className="form-grid">
+
+          {/* NEW PRODUCT TYPE */}
+          <select
+            name="productType"
+            value={form.productType}
+            onChange={handleChange}
+          >
+            <option value="products">Products</option>
+            <option value="clothing">Clothing</option>
+            <option value="gifts">Gifts</option>
+          </select>
 
           <input
             name="name"
@@ -228,11 +263,40 @@ function Products() {
             Best Seller
           </label>
 
+          {/* NEW FEATURED */}
+          <label className="bestseller">
+            <input
+              type="checkbox"
+              name="featured"
+              checked={form.featured}
+              onChange={handleChange}
+            />
+            Featured Product
+          </label>
+
           <div className="discount-box">
             Discount: {discount}% OFF
           </div>
 
         </div>
+
+        {/* SIZE SELECTOR FOR CLOTHING */}
+        {form.productType === "clothing" && (
+          <div className="size-selector">
+            <h4>Available Sizes</h4>
+
+            {["S", "M", "L", "XL", "XXL", "XXXL"].map((size) => (
+              <label key={size}>
+                <input
+                  type="checkbox"
+                  checked={form.sizes.includes(size)}
+                  onChange={() => toggleSize(size)}
+                />
+                {size}
+              </label>
+            ))}
+          </div>
+        )}
 
         {/* MEDIA DROP ZONE */}
         <div
@@ -262,38 +326,22 @@ function Products() {
                 <video
                   src={media.url}
                   controls
-                  className="preview-media"  
+                  className="preview-media"
                 />
               ) : (
                 <img
                   src={media.url}
                   alt=""
                   className="preview-media"
-                />      
+                />
               )}
 
               <div className="preview-actions">
-                <button
-                  type="button"
-                  onClick={() => moveMedia(i, -1)} 
-                >
-                  ←
-                </button>
+                <button type="button" onClick={() => moveMedia(i, -1)}>←</button>
+                <button type="button" onClick={() => moveMedia(i, 1)}>→</button>
+                <button type="button" onClick={() => removeMedia(i)}>❌</button>
+              </div>
 
-                <button
-                  type="button"
-                  onClick={() => moveMedia(i, 1)}
-                >
-                  →
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => removeMedia(i)}  
-                >
-                  ❌
-                </button>
-              </div>  
             </div>
           ))}
         </div>
